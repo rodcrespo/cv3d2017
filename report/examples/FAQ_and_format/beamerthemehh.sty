@@ -1,0 +1,70 @@
+\ProvidesPackage{hh}
+%\definecolor{secinhead}{RGB}{249,196,95}
+%\definecolor{titlebg}{RGB}{51,51,51}
+%
+%\setbeamercolor{secsubsec}{fg=secinhead,bg=black}
+%\setbeamercolor{frametitle}{fg=secinhead,bg=titlebg}
+%
+%\setbeamertemplate{headline}
+%{
+%  \leavevmode%
+%  \hbox{%
+%  \begin{beamercolorbox}[wd=\paperwidth,ht=8.25ex,dp=3.5ex]{secsubsec}%
+%    \raggedright
+%    \hspace*{2em}%
+%    {\sffamily\Large\color{secinhead}\thesection.~\insertsection\hfill\insertsubsection}%
+%    \hspace*{2em}%
+%  \end{beamercolorbox}%
+%  }%
+%}
+%\usebackgroundtemplate{
+%
+%        \includegraphics[width=\paperwidth,height=\paperheight]{template_body}
+%}
+%
+%\setbeamertemplate{frametitle}
+%{\vskip-3pt
+%  \leavevmode
+%  \hbox{%
+%  \begin{beamercolorbox}[wd=\paperwidth,ht=1.8ex,dp=1ex]{template_firstpage}%
+%    \raggedright\hspace*{2em}\small\insertframetitle
+%  \end{beamercolorbox}
+%  }%
+%}
+%\setbeamertemplate{footline}{}
+\setbeamertemplate{background canvas}{%
+    \ifnum\c@framenumber=1%
+  %  \setbeamercolor{normal text}{bg=white,fg=white}
+   % \setbeamercolor{frametitle}{fg = white}
+    %\setbeamerfont{title}{series=\bfseries,parent=structure}
+    %    \setbeamerfont{subtitle}{size=\scriptsize,series=\bfseries,parent=structure}
+    %    \setbeamerfont{author}{size=\scriptsize,series=\bfseries,parent=structure}
+    %    \setbeamerfont{institute}{size=\scriptsize,series=\bfseries,parent=structure}
+    %    \setbeamerfont{date}{size=\scriptsize,series=\bfseries,parent=structure}
+   % \setbeamersize{text margin left=1.2em}
+  %  \setbeamertemplate{frametitle}[default][left]
+      \includegraphics[width=\paperwidth,height=\paperheight]{hh_titlep}% On title page
+    %  \begin{center}
+%          \usebeamerfont{title}\inserttitle
+%          \ifx\insertsubtitle\@empty
+%          \else
+%            \vskip2ex
+%            \usebeamerfont{subtitle}\insertsubtitle
+%          \fi
+%          \ifx\insertauthor\@empty
+%          \else
+%            \vskip2ex
+%            \usebeamerfont{author}\insertauthor
+      %          \\varphi
+      
+%      \end%          \ifx\insertdate\@empty
+%          \else
+%            \vskip2ex
+%            \usebeamerfont{date}\insertdate%
+%          \fi
+     %   \end{center}
+       
+    \else%
+        \includegraphics[width=\paperwidth,height=\paperheight]{hh_body}    % Other frames background
+    \fi%
+}

@@ -1,0 +1,151 @@
+
+
+
+
+
+
+Exercise: Epipolar Geometry
+
+
+
+
+
+1	Suggested reading
+
+Section 13.4 of the course book (Bigun, Vision With Direction) introduces some of the terminology 
+used in the exercise. The theory is discussed in section 13.5 and determination of the fundamental 
+matrix in 13.6.
+
+
+2	Determining the Fundamental Matrix
+
+As you have seen during the theory classes, the projective coordinates (homogenous coordinates) 
+of two corresponding points pr and pl (the notation used here is slighly different from that of the 
+book, p represent the vector from the origin to a point in the corresponding image frame) in the 
+image frames of the two cameras are linked by the following relation (the epipolar equation):
+
+r Fpl = 0.	(1)
+
+Matrix F is a rank-2 3-by-3 matrix known as the fundamental matrix.
+   Determining matrix F is straightforward once you know the coordinates pr (i) and pl(i) for at 
+least 8 corresponding points, since you can then obtain eight equations for the components of F 
+(you do not need nine equations, since F is defined up to a scale factor). This way of finding F is 
+known as the “Eight-Point Algorithm”; in practice, however, you might need more points to keep 
+numerical errors low.
+For each point i you have
+pr (i)T Fpl(i) = ???????(pr (i))j (pl(i))k Fjk = 0	(2)
+j	k
+
+which you can write as the product of a row and a column vector:
+
+[(pr (i))j (pl(i))k ][Fjk ]T = 0	(3)
+where each vector has nine components (one for all the possible values of j and k).
+   When you have several equations like this, you can combine them by grouping the row vectors 
+in a matrix Q:
+Q[Fjk ]T  = 0	(4)
+where Q has one row for each pair of corresponding points. You can then easily determine [Fjk ]T 
+by computing the eigenvalues of QTQ and taking the eigenvector corresponding to the smallest (in 
+theory zero) eigenvalue.
+   For numerical reasons, it is better to normalize the coordinates of the points before solving the 
+system; the next section explains how to do this.
+
+
+3	Normalizing the image coordinates
+
+It is preferable to normalize the coordinates in the image domain so that they have zero average 
+and unit variance before proceeding with the computation above; otherwise, matrix Q can be 
+seriously ill-conditioned.
+
+
+
+
+
+This is done by multiplying each point pl  by matrix
+?1/d	0	?x¯/d?
+
+
+Hl = ?
+
+
+0	1/d	?y¯/d?	(5)
+0	0	1
+
+
+
+where x¯ is the average x component, y¯ is the average y component and
+
+
+
+
+d =	i(xi ? x¯)
+
+
++   i(yi ? y¯)2
+
+
+
+
+with n equal to the number of points.
+
+
+2n	,	(6)
+
+
+   In this way, we obtain the normalized coordinates pˆl = Hlpl and pˆr = Hr pr that can be used 
+in the eight-point algorithm described above. Note that Hl and Hr are not the same and they 
+should be computed separately.
+The eight point algorithm then gives us a matrix F˜; this is related to the original matrix F˜ by
+
+F = HT F˜Hl.	(7)
+
+
+4	Finding the epipoles
+
+The projective coordinates of the epipoles are the null spaces of matrices F and FT . You can find 
+them by computing the SVD
+F = UDVT	(8)
+
+of F. The left image epipole el is the column of V associated with the smallest singular value; the 
+right image epipole er is the column of U associated with the smallest singular value. You will 
+remember that the smallest singular value should be zero, since the fundamental matrix F has 
+rank two. If it is not (which is probably the case), set it to zero and recompute matrix F from the 
+(modified) decomposition. This is the correct way of enforcing the singularity constraint, in that 
+it entails the least possible modification of matrix F in terms of the Frobenius distance (square 
+root of the sum of the squares of the components).
+
+
+5	Verifying the epipolar constraint
+
+Verify the epipolar constraint by drawing the lines
+
+r Fpl(i) = 0	(9)
+
+on the right image for at least two points i1,2 of the left image. The corresponding points pr (i1,2) 
+in the right image should lie on the respective line.
+Do the same in the other direction, starting from the corresponding points in the right image.
+
+
+6	Documentation
+
+Include the following items in your report:
+
+•	A discussion of the Epipolar equation and the Fundamental matrix.
+
+•	Images with the epipolar lines and the corresponding points (either use Matlab or a paint 
+program to mark the points)
+
+
+
+
+Appendix: Useful Matlab commands
+
+
+eig 
+eigs 
+svd 
+mean 
+sum 
+imread
+impixel 
+help
+

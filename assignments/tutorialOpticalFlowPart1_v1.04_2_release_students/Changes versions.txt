@@ -1,0 +1,44 @@
+v 1.01:
+
+- added pause function, keyboard interface, hit 'p' to toggle.
+- added framerate control. The application now has a target framerate of 25 frames/second. This will make application execution similar on all systems.
+- fixed a bug that stopped the videoInput library from working. 
+
+
+v 1.02 BETA (Major Update and extension of content):
+bug fixes:
+- Any width and height(not only square images) of videoinput now fully supported
+
+updates:
+- tutorial tasks extended
+- tutorial pdf extended and improved
+    - discusses and illustrates the problem with noise, multiple motions, deviations from brightness constancy
+	- derivations properly formulated as error minimization techniques.
+	- pdf style improved for readability and presentation (syntax highligting, and fully copy-pasteable code among others)
+- file "ApertureIllustration" added, an interactive illustration of the aperture problem, including barberpole illustration and multiple motions
+- implementation of Horn and Schunk included, but not used in the tutorial pdf (in.method = 'HS')
+- temporal integration by recursive filtering added, to improve regularization and stability (in.tIntegration)
+
+
+(see file exampleUsage.m):
+- Saving and loading flow output supported (new input arguments)
+- Generation of interactive test images now supports added features:
+   - flicker
+   - muliple motions
+   - additive noise
+
+   v 1.03 BETA 
+updates:
+- generation of groundtruth motion from test images now supported, see exampleUsage.m
+- The horn and schunk optical flow has been remolded to look more like the original (same numerical solution)
+- improved documentation
+
+    v 1.04 BETA
+Bug fixes
+- mehotd "nothing" no longer crashes the application
+- in.bRecordFlow will now be ignored for methods that do not produce optical flow
+
+updates:
+- improved the synthetic images. The nature and direction of the linear symmetry textures (parallell smooth bars) are now differently oriented with respect to the rotational motion
+- method "edge" now has a correctly working interactive component. use keys R/F to increase/decrease the gamma parameter
+- improved pdf.

@@ -1,0 +1,398 @@
+%this line is a remark, the same sign as for remarks in Matlab is used in LaTex: "%"
+
+%first we set which class of document. This determines the template:
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{xcolor, graphicx}
+\usepackage{listings}   
+\usepackage{hyperref}
+%\usepackage[framed]{mcode}
+
+\usepackage{wasysym}% provides \ocircle and \Box
+\usepackage{enumitem}% easy control of topsep and leftmargin for lists
+\usepackage{color}% used for background color
+\usepackage{forloop}% used for \Qrating and \Qlines
+\usepackage{ifthen}% used for \Qitem and \QItem
+\usepackage{typearea}
+\areaset{17cm}{26cm}
+\setlength{\topmargin}{-1cm}
+\usepackage{scrpage2}
+
+
+\usepackage[swedish]{babel}
+\selectlanguage{swedish}
+
+
+
+
+%here is a good space to put some of your own quick fixes and style changes. This example sets the appearance of all the blue stuff in the document (used for referencing code and files in the running text). Below, whenever we use the \verb command or "verbatim", then these settings apply to the fonts:
+
+
+\makeatletter
+\renewcommand\verbatim@font{\color{blue}\normalfont\ttfamily}
+\makeatletter
+
+%We define the title and author of the document:
+
+\begin{document}
+\title{Fingeravtrycksidentifiering i perspektiv av  hållbar  samhällsutveckling}
+\author{Josef Bigun}
+\date{}
+\maketitle
+\abstract{
+Högskolan i Halmstad bedriver forskning inom
+  fingeravtryck. Utifrån denna forskning är fingeravtryckstekniken
+  presenterad med betoning på dess
+  roll i samhället avseende  ekonomiska, ekologiska och etiska
+  aspekter. Den nya tekniken har inte bara
+ positiv potential, utan även  begränsningar.  Samhället måste
+ anpassa lagar och bestämmelser till den och
+ erbjuda relevant infrastruktur, t.ex.  ``besiktning'' av
+ fingeravtrycksteknik för att reducera risken av missbruk,  i analogi med bilbesiktning för att reducera risken för fara.
+}
+
+%each section starts like this:
+\section{Inledning}
+%if we want, we can put a label with the section. This label can be used to reference the section later:
+\label{sc:intro}
+
+Biometrisk identifiering är ett intensivt forskningsområde på många forskningsinstitutioner, däribland vid Högskolan i Halmstad (HH).  Det publiceras årligen hundratals vetenskapliga artiklar på konferenser,
+som ICB, IJCB \cite{webicb,webijcb}  och i tidskrifter som IEEE-TIFS
+\cite{webtifs},  där HH bidrar.
+
+Ett aktuellt tema på HH är identifiering av fingeravtryck, som ska studeras i detta dokument m.a.p. Ekologisk, Etisk och Ekonomisk (EEE) påverkan av samhället i perspektiv av hållbar samhällsutveckling. Studien ingår i demonstration av  målen beträffande värderingsförmåga och förhållningssätt i {\em Perspektiv på datateknik}, en  kurs (7.5 hp) som ges vid HH inom ingenjörsutbildningarna \cite{webutbplan}.
+
+I Kap.~\ref{sc:nuvarande}, sammanfattas nuvarande forskning i relation till EEE påverkan av samhället. Detta bidrar huvudsakligen till första målet av kursen, att göra bedömningar. I Kap.~\ref{sc:visionen}, redovisas  visionen för biometrisk forskning med dess möjligheter och begränsningar. Detta bidrar till målet om att visa insikt om möjligheter och begränsningar för teknik användning. I
+Kap.~\ref{sc:kunskap}, presenteras nödvändig kunskap för att kunna
+bidra till samhällsutveckling som forskare i detta område, vilket
+bidrar till målet om egenutveckling.
+Slutsatserna  sammanfattas  i Kap.~\ref{sc:conclusion}. 
+
+
+\section{Nuvarande forskning}
+\label{sc:nuvarande}
+Tjänster, produkter och processer kännetecknar ett samhälles ekonomi. Dessa måste utföras i syfte att individer ska få fördelar som alla är överens om, t.ex. värme, mat, fritid, och bildning.
+Det är också möjligt att erbjuda tjänster, produkter och processer som
+leder till nackdelar för individer, t.ex.  miljöförstörelse, och
+kriminalitet. Nackdelar som samhället måste minimera.
+Identifiering av personer är en viktig komponent i ekonomin, t.ex. när man handlar varor på Internet eller låser upp sin mobiltelefonen med hjälp av fingeravtryck. Det är också viktigt att rätt person ska få en viss fördel eller hållas ansvarig för något oönskat, t.ex. video film, dna prov eller fingeravtryck på brottsplatser.
+
+Eftersom tjänster, produkter och processer ytterst måste utföras av
+individer och för individers bästa, dessutom på ekologiskt och etiskt hållbart sätt, är  identifiering av individer viktig inte bara för ekonomin men
+även för miljön och etiskt leverne.  Aktiviteter där människor bidrar till positiv utveckling i ekonomin med  etiskt och ekologiskt försvarbart resultat ska gynnas.
+Omvänt aktiviteter där människor skadar miljön och drabbar andra människor på oetiskt sätt ska
+elimineras/minimeras. 
+
+Fingeravtryck som identifieringsverktyg har använts
+långt innan Internet och datoreran. På 1800-talet började  Jan Purkyn\u{e}, William Herschel, Alphonse Bertillon, Francis Galton,  Edward Henry, Aziz-ul  Haque, Chandra Bose, \cite{locard} bidraga till användning av fingeravtryck i identifiering.
+Med datorers intåg och Internets utbredning har helt nya  utvecklingar inom teknik tillkommit.
+
+HH bidrar med
+matematiska modeller och metoder för att extrahera information om identitet från bilder som tidigare ansetts värdelösa. Det bygger på
+att man skattar variationer i orientering kring speciella punkter som kallas \emph{minutia}. Tidigare använde man sig bara av
+minutias läge och punktvisa riktning. Ju fler minutia desto säkrare
+identifiering, ungefär som antalet hack i en nyckel eller antal
+tecken i ett lösenord. Den nya tekniken använder 
+alltså information om hur orienteringen varierar även runt minutia punkten och gör att man med färre minutia uppnå högre identifieringssäkerhet, \cite{mikaelyan14darmstadt}.
+
+Fingeravtryck är dock inte bara ett verktyg för brottsplatser.
+Dess identifieringskraft kommer i ökad användning som ersättare för passord, t.ex. som att komma in i egna hem (som komplement till nyckel), ge måltid till rätt personer på skolor och ålderdomshem, banktransaktioner och för att få sociala förmåner i Indien, 
+\cite{webuidai}.
+
+Tills nyligen var det vanligt i Indien, särskilt på landsbygden,
+att människor inte hade något bankkonto under hela livet. Med tillkomstern av ``Unique Identification Authority of India'', UIDAI,
+ges en unik biometrisk identitet  till alla
+indiska medborgare, genom individens
+fingeravtryck, iris, och ansikte. Här är Id-handlingen en delvis virtuell
+handling som implementeras via datakommunikation,  sensorer på
+mobiltelefoner och datorer,  för flera miljarder människor. 
+Härigenom är biometriska identiteten något som man alltid bär med sig,
+dvs man behöver  inte vara rädd för att glömma den hemma eller tappa
+den. 
+\section{Fingeravtryckens möjligheter, begränsningar och missbruk}
+\label{sc:visionen}
+
+UIDAI projektet är ett exempel på hur biometrisk identifiering
+kan implementeras på nationell nivå. Indiska arbetare som arbetar
+långt hemifrån ges möjlighet att skicka pengar till
+sina familjer, rösta i val, etc. Omvänt ger tekniken samhället
+möjlighet att veta om en individ redan har fått ut det den har rätt till och levererat till samhället det den är skyldig för,
+t.ex.  inte röstat mer än en gång samt att inkomsten är i rimlig samklang med skattedeklarationen. Effektiv identifiering av medborgarna och deras ``aktiviteter'' kännetecknar i ökad utsträckning även
+utvecklingsländerna,  inte bara väl utvecklade industri samhällen som har insett behovet sedan åtminstone ett århundrade.
+
+Man kan inte alltid binda en identitet till ett handlande genom fingeravtryck.
+  Fingeravtryck av en man på dryckesflaskor lämnade på en mordplats
+är exempelvis inte ett  bevis för att individen i fråga har begått dådet. Det är en indikation på att han har varit där och kanske festat men fingeravtrycket på glaset binder inte
+personen mer till dådet än festen. Om fingeravtrycket vore på kniven som
+använts för mordet och  blod av offret påträffas på hans kläder, ja då är beviset av sambandet betydligt starkare. Det finns alltså gott om situationer då fingeravtrycks
+tekniken har begränsningar och utveckling av 
+nya metoder för identifikation är nödvändig.
+
+Samhället har inte alltid rätt att identifiera en individs handlande under förevändning av att bekämpa ``brott'', inklusive ekonomiska och miljömässiga sådana. 
+Här måste samhället vara tydligt med att inte inkräkta på
+den personliga sfären, en rättighet för individen som samhället självt har reglerat genom lagar. Samhället måste aktivt medverka,
+genom sina processer, till att identifiering som innebär
+risker för individens utövande av sin rätt (t.ex. personlig integritet),
+och hälsa elimineras eller minskas. Exempel på hur sådana samhällsprocesser kan vara ges härnäst.
+
+Bilar, lastbilar, bussar, etc  dödar ca 300 människor årligen i Sverige,  \cite{webtransport}.
+Bilismen släpper ut  tonvis  miljöskadliga ämnen, \cite{webutslapp}.
+Vägtrafik är alltså en mycket skadlig teknik men dess fördelar i termer av tidsvinst har trots detta lett till vår underskattning om dess
+risker. Välutvecklade samhällen har hög medvetenhet om dess risker och agerar därefter:
+\begin{itemize}
+\item förbättrar {\em fordonen}  tekniskt så att olyckorna/miljöskadorna blir mindre skadliga
+\item  förbättrar fordonens fysiska {\em miljö } t.ex. vägarna, korsningarna,tekniskt så att olyckorna/miljöeffekterna minskas
+\item förbättrar {\em lagarna}  så att riskerna med fordonens användning
+  reduceras, t.ex. årliga besiktningskrav.
+\end{itemize} 
+Detta förhållningssätt gäller även biometrisk identifiering, som ger
+tidsvinster, varigenom miljön påverkas t.ex. genom att kommunala
+person transporter kan effektiviseras ytterligare mha fingeravtryck istället för kort/sms. Teknik
+som använder fingeravtryck måste utvecklas ständigt, samtidigt som den
+fysiska och lagliga miljön där fingeravtryck kommer till användning,
+måste uppdateras så att den personliga integriteten av individer inte urholkas. Samhällsåtgärder för effektiv användning av teknik
+är ett forskningsområde i sig, \cite{Cash08072003}, när det gäller
+hållbar utveckling.
+\section{Kunskaper som används i fingeravtrycksigenkänning, och
+  relation till datateknik}
+\label{sc:kunskap}
+Basämnet som kommer till direkt använding i fingeravtrycksigenkänning
+är {\em  Bildanalys } eftersom det är bilder som ska
+igenkännas m.a.p. visuellt innehåll. I Sverige och internationellt lär man ut ämnet via kurser.   Dessa ges av akademier eller institut vid universitet specialiserade i datorteknik, elektroteknik eller robotik, i ungefär samma omfattning.
+ Det förekommer också att det ges av institut
+specialiserade i Matematik,  men i mindre utsträckning än de tre nämnda.
+Det förklaras av att bildbehandling bygger på dessa fyra kunskaps
+områden och är  ett relativt nytt ämne
+ i  högre studier.  Ämnet är exempelvis yngre än fysik även om delar av det
+ som kan hänskjutas till fotogrametri eller markförvaltning mha kartor
+ (antika egypten!) har en respektabel ålder.
+
+
+
+Inom  {\em datateknik}, till vilken författaren har fått i uppdrag att
+särskilt redogöra relationen av fingeravtrycksigenkänning, kan man  se
+(utöver bildbehandling som ju också görs anspråk på av datateknik), 
+programmering av algoritmer, parallel beräkning,
+databas hantering, nätverksprogrammering, och datastrukturer. Analys av fingeravtryck görs av datorprogram och måste utföras säkert, men ställer också krav på effektivt utnyttjande av minnesresurser och beräkningskapacitet.
+  Det senare  innebär  bl.a. att  falska matchningar måste
+minimeras, men också att den  personliga integriteten  måste bevaras. 
+Algorithmer som implementeras i datorprogram kan t.ex. handla om att rotera ett fingeravtryck för att
+se om 
+det passar ett annat fingeravtryck, eller  att extrahera 
+minutiae. Databaser används i de fall en-mot-många matchningar behövs,
+t.ex. när  ambassader behöver 
+ matcha ett
+fingeravtryck mot miljoner  andra som finns i Europeiska fingeravtrycksdatabasen för visum
+administration. Eftersom svar kan behövas snabbt,  måste de delar av
+sökningen som kan göras samtidigt köras av flera processorer, 
+datorer, eller på en farm  av datorer. Därför  behövs parallel
+programmering och nätverksprogrammering.  Datastrukturer är väsentlig
+för effektiv implementering av samtliga datatekniska metoder, samt för 
+matematiska algorithmer så som kryptering och sökningar m.a.p. bildinnehåll som
+diskuteras härnäst.
+
+
+I fingeravtrycksteknik används avancerade igenkänningsmetoder ofta i en
+flerdimensionell signalrymd. Redan själva avtrycket, som ju  är  en
+bild, är  en
+två dimensionell signal, men beräknade egenskaper av varje bildpunkt kan ha betydligt
+högre dimensioner än två.
+Det behövs därför kunskaper i matematik, som sammanfattas av 
+{\em Multidimensionell Analys} väl. I sin
+tur förutsätter ju detta  kunskaper i {\em Analys},   {\em Algebra},
+och {\em Transformteori}. {\em Signalbehandling}
+representerar ett kompletterande kunskapsområde med vars hjälp man kan
+effektivisera fingeravtrycksanalys. Eftersom, resultatet är metoder
+implementerade i maskiner, exempelvis i en mobiltelefon eller en
+farm av datorer, är matematiska kunskaper sammanvävda med de som har nämnts
+inom datateknik området. 
+
+
+\section{Slutsatser}
+\label{sc:conclusion} 
+Fingeravtryck är en gammal form av identifiering som har fått nya möjligheter i samhället genom ökade resurser inom
+datorberäkning  och kommunikation. Tekniken har  inte bara
+positiv potential, utan också  begränsningar och kan även
+missbrukas. Samhället måste ställa krav på och ge resurser
+till tekniken, för att den ska
+leverera sin  potential   beträffande ekonomisk, ekologisk
+och etisk utveckling av samhället. 
+
+\section*{Tack}
+Tacksamt har jag tagit emot tips av Dr. Nicholas Wickström på HH i
+samband med detta studie.
+
+
+\newpage
+\bibliography{samh}
+\bibliographystyle{plain}
+
+\newpage
+%\documentclass[a4paper,10pt,BCOR10mm,oneside,headsepline]{scrartcl}
+%% \pagestyle{scrheadings}
+%% \ihead{Checklista för perspektiv av ...}
+%% \ohead{\pagemark}
+%% \chead{}
+%% \cfoot{}
+
+%% questioneer adepted from:
+%% 2010, 2012 by Sven Hartenstein
+%% mail@svenhartenstein.de
+%% http://www.svenhartenstein.de
+
+%% \Qq = Questionaire question. Oh, this is just too simple. It helps
+%% making it easy to globally change the appearance of questions.
+\newcommand{\Qq}[1]{\textbf{#1}}
+
+%% \QO = Circle or box to be ticked. Used both by direct call and by
+%% \Qrating and \Qlist.
+\newcommand{\QO}{$\Box$}% or: $\ocircle$
+
+%% \Qrating = Automatically create a rating scale with NUM steps, like
+%% this: 0--0--0--0--0.
+\newcounter{qr}
+\newcommand{\Qrating}[1]{\QO\forloop{qr}{1}{\value{qr} < #1}{---\QO}}
+
+%% \Qline = Again, this is very simple. It helps setting the line
+%% thickness globally. Used both by direct call and by \Qlines.
+\newcommand{\Qline}[1]{\noindent\rule{#1}{0.6pt}}
+
+%% \Qlines = Insert NUM lines with width=\linewith. You can change the
+%% \vskip value to adjust the spacing.
+\newcounter{ql}
+\newcommand{\Qlines}[1]{\forloop{ql}{0}{\value{ql}<#1}{\vskip0em\Qline{\linewidth}}}
+
+%% \Qlist = This is an environment very similar to itemize but with
+%% \QO in front of each list item. Useful for classical multiple
+%% choice. Change leftmargin and topsep accourding to your taste.
+\newenvironment{Qlist}{%
+\renewcommand{\labelitemi}{\QO}
+\begin{itemize}[leftmargin=1.5em,topsep=-.5em]
+}{%
+\end{itemize}
+}
+
+%% \Qtab = A "tabulator simulation". The first argument is the
+%% distance from the left margin. The second argument is content which
+%% is indented within the current row.
+\newlength{\qt}
+\newcommand{\Qtab}[2]{
+\setlength{\qt}{\linewidth}
+\addtolength{\qt}{-#1}
+\hfill\parbox[t]{\qt}{\raggedright #2}
+}
+
+%% \Qitem = Item with automatic numbering. The first optional argument
+%% can be used to create sub-items like 2a, 2b, 2c, ... The item
+%% number is increased if the first argument is omitted or equals 'a'.
+%% You will have to adjust this if you prefer a different numbering
+%% scheme. Adjust topsep and leftmargin as needed.
+\newcounter{itemnummer}
+\newcommand{\Qitem}[2][]{% #1 optional, #2 notwendig
+\ifthenelse{\equal{#1}{}}{\stepcounter{itemnummer}}{}
+\ifthenelse{\equal{#1}{a}}{\stepcounter{itemnummer}}{}
+\begin{enumerate}[topsep=2pt,leftmargin=2.8em]
+\item[\textbf{\arabic{itemnummer}#1.}] #2
+\end{enumerate}
+}
+
+%% \QItem = Like \Qitem but with alternating background color. This
+%% might be error prone as I hard-coded some lengths (-5.25pt and
+%% -3pt)! I do not yet understand why I need them.
+\definecolor{bgodd}{rgb}{0.8,0.8,0.8}
+\definecolor{bgeven}{rgb}{0.9,0.9,0.9}
+\newcounter{itemoddeven}
+\newlength{\gb}
+\newcommand{\QItem}[2][]{% #1 optional, #2 notwendig
+\setlength{\gb}{\linewidth}
+\addtolength{\gb}{-5.25pt}
+\ifthenelse{\equal{\value{itemoddeven}}{0}}{%
+\noindent\colorbox{bgeven}{\hskip-3pt\begin{minipage}{\gb}\Qitem[#1]{#2}\end{minipage}}%
+\stepcounter{itemoddeven}%
+}{%
+\noindent\colorbox{bgodd}{\hskip-3pt\begin{minipage}{\gb}\Qitem[#1]{#2}\end{minipage}}%
+\setcounter{itemoddeven}{0}%
+}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% End of questionnaire command definitions %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{document}
+
+\begin{center}
+\textbf{\huge Checklista samhälle }
+\end{center}\vskip1em
+
+\begin{enumerate}
+ \item {\bf Kan redogöra för vald produkt/tjänst/process i alla
+    moment. }
+\\
+  \hskip0.4cm \QO{} inte alls. \hskip0.5cm \QO{} delvis \hskip0.5cm
+  \QO{} helt  {({\em Check boxarna ifylls av examinator.})}
+  \item {\bf Visar på förmåga av planering}\\
+      \Qtab{3cm}{inte alls \Qrating{5} absolut ({\em \small Check boxarna ifylls av  examinator.} )}\\
+{\bf Egenbedömning} 
+({\em \small Egenbedömning ifylls av student.}) \\
+Rapporten är huvudsakligen organiserad i delar som motsvarar lärande målen.
+  Paragrafer motsvarande
+  titel, sammanfattning,
+    introduktion (Sektion \ref{sc:intro}), presentation av forskningen
+    (Sektion \ref {sc:nuvarande},  mål C1 i underlaget), vision av forskningen
+    (Sektion \ref {sc:visionen}, Mål C2 i underlaget), kunskaper relevanta
+   för forskningen (Sektion \ref {sc:kunskap}, Mål C3 i underlaget),  samt
+    sammanfattning finns och rubrikerna är i samklang med innehållet.
+  \item {\bf Visar på förmåga av utvärdering} \\
+      \Qtab{3cm}{inte alls \Qrating{5} absolut ({\em \small Check boxarna ifylls av  examinator.} )}
+\\
+{\bf Egenbedömning} 
+({\em \small Egenbedömning ifylls av student.}) \\
+Sektion \ref{sc:nuvarande}), och Sektion \ref{sc:visionen} innehåller de
+delarna som demonstrerar den önskade utvärderingen. Dessa är  understödda av 10
+referenser varav 3 är vetenskapliga (\cite{Cash08072003},
+\cite{locard}, \cite{mikaelyan14darmstadt})  och 2 är
+myndighetsdokument (\cite{webutbplan}, \cite{webtransport})  som måste
+uppfylla vetenskaplig rigör och åtkomst enligt gällande lagar
+och bestämmelser. De sistnämnda är återgivna som url, men genom deras diarieföring
+ garanteras allmänheten åtkomst, även   om de inte skulle vara tillgängliga på Internet.
+\end{enumerate} 
+
+%% \Qitem{\Qq{Kan redogöra för vald produkt/tjänst/process i alla
+%%     moment.} \\
+%%   \hskip0.4cm \QO{}
+%% inte alls. \hskip0.5cm \QO{} delvis \hskip0.5cm \QO{} helt }
+%% ({\em Check boxarna är för examinator.})
+%% \vskip.5em
+
+%% \Qitem{ \Qq{Visar på förmåga av planering}\\
+%% ({\em Check boxarna är för examinator.} )\\
+%%   \Qtab{3cm}{inte alls \Qrating{5} absolut}}\\
+%% {\bf Egenbedömning} \\
+%% {\em Egenbedömning ifylls av student.} \\
+%% Rapporten är huvudsakligen organiserad i delar som motsvarar lärande målen.
+%%   Paragrafer motsvarande
+%%   titel, sammanfattning,
+%%     introduktion (Sektion \ref{sc:intro}), presentation av forskningen
+%%     (Sektion \ref {sc:nuvarande},  mål C1 i underlaget), vision av forskningen
+%%     (Sektion \ref {sc:visionen}, Mål C2 i underlaget), kunskaper relevanta
+%%    för forskningen (Sektion \ref {sc:kunskap}, Mål C3 i underlaget),  samt
+%%     sammanfattning finns och rubrikerna är i samklang med innehållet.
+%%     \Qitem{ \Qq{Visar på förmåga av utvärdering} \\
+%%       ({\em Check boxarna är för examinator.} )\\
+%%       \Qtab{3cm}{inte alls \Qrating{5} absolut}}
+%% {\bf Egenbedömning} \\
+%% {\em Egenbedömning ifylls av student.} \\
+%% Sektion \ref{sc:nuvarande}), och Sektion \ref{sc:visionen} innehåller de
+%% delarna som demonstrerar den önskade utvärderingen. Dessa är  understödda av 10
+%% referenser varav 3 är vetenskapliga (\cite{Cash08072003},
+%% \cite{locard}, \cite{mikaelyan14darmstadt})  och 2 är
+%% myndighetsdokument (\cite{webutbplan}, \cite{webtransport})  som måste uppfylla vetenskaplig rigör enligt gällande lagar
+%% och bestämmelser. De sist nämnda är återgivna som url, men
+%% svenska bestämmelser och lagar (t.ex. diarieföring) gällande myndigheter garanterar åtkomst
+%% till dessa dokument på annat sätt, ifall  om de inte skulle vara tillgängliga på Internet.
+
+
+\end{document}

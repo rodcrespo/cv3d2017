@@ -1,0 +1,173 @@
+\documentclass[pdf]{beamer}
+\usetheme{hh}
+ \input{Packages}
+ \usepackage{animate}
+\usepackage{hyperref}
+\setbeamersize{text margin left=1.2em}
+
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\definecolor{uuuuuu}{rgb}{0.26666666666666666,0.26666666666666666,0.26666666666666666}
+\definecolor{qqqqff}{rgb}{0.,0.,1.}
+\definecolor{ffqqqq}{rgb}{1.,0.,0.}
+
+\def\reals{ { {\rm I \kern-0.15em R } } }
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\!\operatorname{max}}\;}
+
+
+\begin{document}
+
+
+
+%% %Show toc at the begging of each section
+%% \AtBeginSection[]
+%% {
+%% \begin{frame}{Outline}
+%% \tableofcontents[currentsection] 
+%% \end{frame}
+%% }
+
+
+%Title frame details
+\title{\textcolor{black}{\strut  Recurring  deficits and questions in
+    reports.}}
+%% \author{\textcolor{white}{Anna Mikaelyan and Josef Bigun}\vspace{25mm}}
+\author{
+       Josef~Bigun,%~\IEEEmembership{Fellow,~IEEE}% <-this % stops a space
+\\
+  Halmstad University, \\Intelligent Systems Laboratory, \\ SE-30118 Sweden.\\
+%% \IEEEcompsocitemizethanks{\IEEEcompsocthanksitem Authors are  with
+%%   Halmstad University, Department of Embedded Intelligent Systems,  SE-30234 Sweden.\protect\\
+% note need leading \protect in front of \\ to get a newline within \thanks as
+% \\ is fragile and will error, could use \hfil\break instead.
+  %% E-mail:
+  josef.bigun@hh.se%
+}
+\date{ }
+%\vspace{-25mm}\textcolor{white}\today}
+
+%%Frame
+\begin{frame}
+\maketitle  %There is no need to issue title etc explicitly
+             %...It is done in \maketitle
+\end{frame}
+
+\section {General}
+\begin{frame}{General}
+\begin{itemize}
+\item {\bf  Can I write my article in another language than English?}\\
+     No. To 
+     express a scientific analysis in english is one of the outcomes
+     of the course.
+\item {\bf  What software should I use to produce the report?}\\
+We recommend you to use pdflatex, which is available freely for the
+most popular operative systems, as well as  directly as a web service
+(e.g. search for sharelatex on internet). This is because writing  master
+thesis report, presentation slides, and interacting with teachers of
+our lab on these is  more
+efficient if the production is done in pdflatex. You can also use
+another software evidently as long as you know how to produce them.
+\end{itemize} 
+\end{frame}
+
+
+
+\section{Introduction section} 
+\begin{frame}{Recurring deficits } 
+\begin{itemize}
+  \item {\bf  Context and purpose not mentioned}\\
+Please, tell that you were required to produce this report in the
+course, and why so i.e. 
+what it will supposedly demonstrate (your ability to find, read, and understand to a reasonable depth a scientific paper). 
+\item {\bf  Another author's wording has been used for context and purpose...}\\
+No, you must write it in your  way!  See  plagiarism below.
+\item {\bf  Another author's wording has been used for citing a scientific reference...}\\
+Again, No, you must write it in your  way! See  plagiarism below.
+\end{itemize}
+\end{frame} 
+
+\section{Language and format} 
+\begin{frame}{Language and format}
+\begin{itemize}
+\item {\bf Grammar is bad, spelling is bad...}   \\
+We do not judge your language abilities in this course, although other courses may. HOWEVER, if the grammar and spelling is so seriously bad that your message 
+and logics is not comperhensable, then you will have to raise its quality or else it will be rejected. We assume  that you will take every opportunity
+in the rest of your studies to improve your ability in scientific writing.  A single report
+is not sufficient.
+\item {\bf I have listed references at the end but I have not commentted them in the text. Is this ok?} \\
+No, you must comment/cite every single item appearing in the reference
+list. Reference list must be demonstatively relevant, in particular  no item should be there as   decoration.
+\end{itemize}
+ \end{frame} 
+
+
+\section{Plagiarism} 
+\begin{frame}{Copy-paste,  Plagiarism}
+\begin{itemize} 
+\item {\bf Can I copy and paste text from Wikipedia?}\\
+Absolutely NOT! Copying from ANYWHERE,  giving the impression that 
+it is your words is plagiarism or piracy. This  can result in
+exclusion from  the course and possibly  the school,  per bylaw of HH.
+However,   citing is fine,  
+provided that you  do it appropriately, e.g. quotations and with mention of the source.
+\item {\bf I found a graphics material (picture, or drawing) in the
+  internet.  Can I use it in my report? }
+ \\
+This is tricky and in        a gray zone. You have citation right, but
+the material can be copyrighted.  In any case, if you use the material,  YOU MUST
+DEMONSTRATIVELY write its source, in the caption. Else it is considered plagiarism again...with 
+the same serious consequences as above. If you use too many such
+graphics of the same source, you start to enter the black zone...
+\end{itemize} 
+\end {frame}
+
+\section{Scientific references} 
+\begin{frame}{Scientific references}
+\begin{itemize}
+\item {\bf How do you dare to refuse my citation to a reference  such as
+  ``NEW SCIENTIST'', ``ILLUSTRERAD VETENSKAP'', ``WIKIPEDIA'',  ``Master-thesis report at OXFORD'' as non-scientfic ?} \\
+No offense!. These are great sources to learn about science but they
+are not peer reviewed scientific articles. They might even have a high
+scientific quality. That said, you are allowed to make a reference to such an article. However, in this assignment we want you to recognize peer
+reviewed scientific articles. Consequently, at least one item in the
+reference list must be a peer reviewed scientific article. 
+\end{itemize}
+ \end{frame} 
+
+
+\section{...Scientific articles} 
+\begin{frame}{...Peer reviewed scientific articles}
+\begin{itemize}
+\item {\bf How do I recognize a peer reviewed scientific article then?  Is it written on it somewhere?}  \\
+\begin{itemize}
+\item  The fact is usually not written anywhere in the article.
+\item Scientific articles cite (almost always) only other scientific
+  articles. If the reference list of an article is dominated by
+  web-links it is an indication for that the article is not
+scientific. 
+\item    Search engines specialized in scientific articles include
+       \begin{itemize}
+       \item     \url{http://scholar.google.com} \\
+         \url{http://apps.webofknowledge.com}  HH library has a subsription
+         service to this site offered to employees and students. You
+         must be at HH OR 
+          have connection permissions.
+\item The sites \url{elsevier.com}, \url{springer.com}, \url{jstor.org} have
+also (smaller) search facilities. These sites are also known
+scientific article publishers. Patents will be considered as scientific.
+\end{itemize}
+\item Finally, recognizing peer-reviewed scientific papers is one of the
+  outcomes of this course.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+%jbj
+
+
+
+
+\end{document}

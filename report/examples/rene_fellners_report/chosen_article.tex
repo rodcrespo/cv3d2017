@@ -1,0 +1,169 @@
+%this line is a remark, the same sign as for remarks in Matlab is used in LaTex: "%"
+
+%first we set which class of document. This determines the template:
+\documentclass[]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{xcolor, graphicx}
+\usepackage{listings}   
+\usepackage{hyperref}
+%\usepackage[framed]{mcode}
+
+\usepackage{amsmath}
+\usepackage{wasysym}% provides \ocircle and \Box
+\usepackage{enumitem}% easy control of topsep and leftmargin for lists
+\usepackage{color}% used for background color
+\usepackage{forloop}% used for \Qrating and \Qlines
+\usepackage{ifthen}% used for \Qitem and \QItem
+\usepackage{typearea}
+\areaset{17cm}{26cm}
+\setlength{\topmargin}{-1cm}
+\usepackage{scrpage2}
+
+
+\usepackage[english]{babel}
+\selectlanguage{english}
+
+
+\newcommand{\baseTitle}[0]{A Tensor-Driven Active Contour Model for Moving Object Segmentation}
+\newcommand{\baseNames}[0]{Gerald Kühne, et al.\ }
+\newcommand{\baseCite}[0]{\cite{kuhne2001tensor}\ }
+
+
+%here is a good space to put some of your own quick fixes and style changes. This example sets the appearance of all the blue stuff in the document (used for referencing code and files in the running text). Below, whenever we use the \verb command or "verbatim", then these settings apply to the fonts:
+
+\makeatletter
+\renewcommand\verbatim@font{\color{blue}\normalfont\ttfamily}
+\makeatletter
+
+%We define the title and author of the document:
+
+\begin{document}
+\title{Summery of \\\baseTitle \ \baseCite }
+\author{René Fellner}
+\date{}
+\maketitle
+
+\abstract{
+\baseNames show in the work \baseCite how to combine tensor based optical flow \cite{bigun1991multidimensional}, a tensor driven active contour model \cite{kichenassamy1996conformal} and a contour refinement \baseCite to accomplish moving object segmentation. Therefore object boundaries can be tracked within a video stream. 
+}
+
+%each section starts like this:
+\section{Introduction}
+%if we want, we can put a label with the section. This label can be used to reference the section later:
+\label{sc:intro}
+
+This document summarizes the work "\baseTitle" \baseCite of \baseNames It was created on behalf of Josef Bigun in the context of the lecture "Computer Vision in 3D" at Halmstad University in 2016. 
+"\baseTitle" \baseCite was selected because it cites and is based on the examiners work on optical flow \cite{bigun1991multidimensional}. The purpose of this summary is an exercise in research and understanding scientific papers.
+
+
+\section{Tensor-based Motion Detection}
+\label{sc:motion_detection}
+A video sequence can be described as a 3 dimensional matrix with x, y as pixel and z as frame in time. This matrix is denoted as $I(x,y,z)$. If we assume that the video sequence has only grey values and the illumination of the scene is constant, we can detect object flow according to \cite{bigun1991multidimensional}. This is accomplished by minimizing the 3-dimensional neighborhood:
+	\begin{equation} 
+	\int_{\Omega}(\nabla{_3} I(x,y,z) n)^2\ dx\ dy\ dz \label{eq:local_neigborhood_3d}
+	\end{equation} 
+
+Minimization of equation \ref{eq:local_neigborhood_3d} can be effectively accomplished by calculating the eigenvector of the minimum eigenvalue of the 3D structure tensor: 
+	\begin{equation}
+	J = \begin{bmatrix} 
+ 		J_{xx} & J_{xy} & J_{xz} \\
+		J_{yx} & J_{yy} & J_{yz} \\	
+		J_{zx} & J_{zy} & J_{zz} 
+ 		\end{bmatrix}
+ 		\label{eq:structure_tensor_3d}
+	\end{equation}
+	
+	\begin{equation}
+		J_{pq}(x,y,z) = \int_\Omega\delta_p I(x',y',z') \delta_q I(x',y',z') dx' dy' dz'
+		\label{eq:Jqp_definition}
+	\end{equation}
+	
+Equations \ref{eq:local_neigborhood_3d}, \ref{eq:structure_tensor_3d}, \ref{eq:Jqp_definition} accordingly to Bigun \cite{bigun1991multidimensional}.
+The eigenvalues $\lambda_{1}, \lambda_{2}, \lambda_{3}$ of $J$ (eq. \ref{eq:structure_tensor_3d}) are able to classify the local motion of the grey values. 
+Because of the noise in real world video material, two coherence measures are applied on the eigenvalues \cite{kuhne2001tensor}: 
+	\begin{equation}
+		c_t = 
+		\begin{cases}
+			0 & \lambda_1 = \lambda_3, \\
+			exp(\frac{-C}{|\lambda_1 - \lambda_3|}) & else
+		\end{cases}
+	\end{equation}
+
+	\begin{equation}
+		c_s = 
+		\begin{cases}
+			0 & \lambda_2 = \lambda_3, \\
+			exp(\frac{-C}{|\lambda_2 - \lambda_3|}) & else
+		\end{cases}
+	\end{equation}
+Based on the classification and the motion vector of each pixel, every pixel can be labeled as relevant for motion or not. This is based on the assumption of an static camera, if an moving camera is used the camera motion has to be considered.
+This scheme delivers a proper motion flow detection of regions, but it has flaws in accurately tracking the boundaries of objects. 
+	
+
+\section{Tensor-driven Active Contour Model}
+\label{sc:active_contour_model}
+The Active Contour Model is used to group the moving regions of chapter \ref{sc:motion_detection} as an trackable object. Therefor the concept of geodesic active contours \cite{caselles1997geodesic} is used. The idea behind it is to basically use the snake model \cite{caselles1997geodesic}, but enhance it to describe the curvatures around the regions. This is known as image evolution process \cite{kuhne2001tensor}: 
+	\begin{equation}
+		\frac{\delta{u}}{\delta{t}} = g(I)(c+\kappa)|\nabla{u}|+\nabla{u}*\nabla{g}
+		\label{eq:image_evolution}
+	\end{equation}
+	
+	with:
+	\begin{itemize}[label={}]
+		\item $I := I(x,y,z)$ ... 3 dimensional matrix (video sequence)  
+		\item $\nabla = (\delta_x, \delta_y)$ ... spatial gradient
+		\item $\kappa$ ... curvature
+		\item $u$ ... zero level set \cite{osher1988fronts} 
+		\item $c$ ... constant force for convergence
+		\item $g$ ... stopping function (eq. \ref{eq:stopping_function})
+	\end{itemize} 
+	
+Using a stopping function derived from the motion detection (chapter \ref{sc:motion_detection}) for the curvature \cite{kuhne2001tensor} \cite{kichenassamy1996conformal}:
+ 	\begin{equation}
+ 		g(I(x,y,z)) = 
+ 		\begin{cases}
+ 			1 & c_t(x,y,z) < 1-\epsilon, \\
+ 			1 & c_t(x,y,z) \geq 1-\epsilon \wedge v(x,y,z) < T_v, \\
+ 			0 & c_t(x,y,z) \geq 1-\epsilon \wedge v(x,y,z) \geq T_v
+ 		\end{cases}
+ 		\label{eq:stopping_function}
+ 	\end{equation}   
+ 		
+ 	with:
+	\begin{itemize}[label={}]
+		\item $v$ ... 2D velocity
+		\item $T_v$ ... velocity threshold
+	\end{itemize}
+ 	
+The stopping function (eq. \ref{eq:stopping_function} describes the contour of the objects.
+This allows the algorithm to determine moving objects and place several curves around them. 	
+
+\section{Contour Refinement}
+\label{sc:contour_refinement}
+
+To refine the contours around the objects the image evolution process equation  \ref{eq:image_evolution} is repeated on a single frame with another stopping function \cite{kuhne2001tensor}:
+
+	\begin{equation}
+		\tilde{g}(I) = \frac{1}{1+\frac{|\nabla \tilde{I}|^2}{\tilde{C}^2}}
+	\end{equation} 
+ 
+with:
+	\begin{itemize}[label={}]
+		\item $\tilde{C}$ ... contrast parameter
+		\item $T_v$ ... velocity threshold
+	\end{itemize}
+
+This allows more exact boundary for each moving object.
+
+\section{Conclusion}
+\label{sc:conclusio} 
+
+The paper \baseCite shows that 3-dimensional tensor based motion flow, active contour model and several iterations of refinement can produce a proper framework to realiable track motion of objects within a video stream.
+
+\newpage
+\bibliography{bib_mos}
+\bibliographystyle{unsrt}
+
+\end{document}

@@ -1,0 +1,90 @@
+%this line is a remark, the same sign as for remarks in Matlab is used in LaTex: "%"
+
+%first we set which class of document. This determines the template:
+\documentclass[]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{xcolor, graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+\usepackage{wasysym}% provides \ocircle and \Box
+\usepackage{enumitem}% easy control of topsep and leftmargin for lists
+\usepackage{color}% used for background color
+\usepackage{forloop}% used for \Qrating and \Qlines
+\usepackage{ifthen}% used for \Qitem and \QItem
+\usepackage{typearea}
+\areaset{17cm}{26cm}
+\setlength{\topmargin}{-1cm}
+\usepackage{scrpage2}
+
+
+\usepackage[english]{babel}
+\selectlanguage{english}
+
+
+\newcommand{\baseTitle}[0]{Optical flow based analyses to detect emotion from human facial image data}
+\newcommand{\baseNames}[0]{Axel Besinger, et al.\ }
+\newcommand{\baseCite}[0]{\cite{besinger2010optical}\ }
+
+
+%here is a good space to put some of your own quick fixes and style changes. This example sets the appearance of all the blue stuff in the document (used for referencing code and files in the running text). Below, whenever we use the \verb command or "verbatim", then these settings apply to the fonts:
+
+\makeatletter
+\renewcommand\verbatim@font{\color{blue}\normalfont\ttfamily}
+\makeatletter
+
+%We define the title and author of the document:
+
+\begin{document}
+\title{Summary of \\\baseTitle \ \baseCite }
+\author{Rodrigo Crespo}
+\date{November 1, 2017}
+\maketitle
+
+\abstract{
+\baseNames describe in the work \baseCite a method to detect emotions from a set of images by a new approach which uses extraction of features from facial regions, establishes patterns via optical flow and finally processes the data with classification in one of the emotions categories.
+}
+
+%each section starts like this:
+\section{Introduction}
+%if we want, we can put a label with the section. This label can be used to reference the section later:
+\label{sc:intro}
+
+This document is a report of the work "\baseTitle" \baseCite by \baseNames created in 2017 for the course "Computer Vision in 3D" at Halmstad University. The requirement for the report was for it to be based on a scientific paper related to optical flow. "\baseTitle" \baseCite was chosen because it is based on "Feature-point tracking by optical flow discriminates subtle differences in facial expression" \cite{cohn1998feature} by Cohn, et al. and specifically "An iterative image registration technique with an application to stereo vision" \cite{lucas1981iterative} by Lucas, et al. which is explains one of the main algorithms we used in our lectures. In this paper I will explain and summarize what the main subject, methods and results of the article are and conclude with my own impressions.
+
+\section{Methods}
+\label{sc:methods}
+This section explains the steps of the new proposed technique for the facial emotion recognition process. The method uses image sequences to create template feature vectors and then be able to process new image sequences and classify them. In this case there were used a total of 60 images from mixed racial groups, 30 from Kanade et al. \cite{kanade2000comprehensive}, Lyons et al. \cite{lyons1998japanese} and Liu \cite{liu2002eigenflow}.
+
+\subsection{Image pre-processing}
+An image pre-processing technique is applied in order to normalize the images and to acquire facial features that will allow for later extraction. All the dataset images were transformed into greyscale images and resized to 256 $\times$ 256 pixel dimension. Also, five facial regions (both eyebrows, both eyes and mouth) were cropped from the image.
+
+\subsection{Facial feature extraction}
+After obtaining the normalized images, facial features are extracted from the first frame of each image sequence and tracked to trace the displacement of each feature point. For the tracking, the Lucas and Kanade optical flow algorithm \cite{lucas1981iterative} was used to estimate the flow of each feature point by substracting its current position from the position of the previous frame. With this algorithm they obtained 26 feature vectors with angles and magnitudes that represent the displacement of each feature vector (8 for the eyebrows, 8 for the eyes and 10 for the mouth).
+
+\subsection{Facial expression classification}
+\label{sc:methods}
+In the end, the magnitude and angle of the feature vectors are compared from templates in order to classify them into four emotion categories: happiness, sadness, anger and a null category.
+
+\newpage
+\section{Experiment and result}
+\label{sc:experiment}
+For the experiments the software development environment used was Matlab. There were used 30 image sequences to create the template feature vectors and another set of 30 image sequences for testing and to evaluate the program.
+
+After processing the images, the 83.33\% of them were classified in one of the three categories and 16.77\% could not be classified, so null category was given. Also 63.33\% of that 83.33\% were classified in the correct category.
+The results demonstrates the capability of the algorithm to distinguis happiness from sadness and anger as 80\% of the happy images were classified correctly, while the rest were classified as null. Anger got an accuracy of 50\% and sadness of 60\%, and some of the angry images were placed in the sadness category, and the opposite happened too.
+
+The accuracy of the overall algorithm was $\geq$ 50\%.
+
+\section{Conclusion}
+\label{sc:conclusion}
+The provided technique seems capable of classifying emotions from image sequences the results provided prove that. However, as it is also discussed in the paper, a more complete set of images is needed in order to be able to improve the accuracy, as not enough distinction is provided within the templates used to separate alike visually emotions like sadness and anger.
+
+
+\bibliography{bibliography}
+\bibliographystyle{unsrt}
+
+\end{document}
